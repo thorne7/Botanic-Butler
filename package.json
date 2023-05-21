@@ -1,7 +1,7 @@
 {
-  "name": "project-3",
+  "name": "Botanic Butler",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Plant Care Tracker",
   "main": "server/server.js",
   "scripts": {
     "start": "node server --ignore client",
