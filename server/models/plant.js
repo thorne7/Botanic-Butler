@@ -4,19 +4,28 @@ const plantSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-  },
-  wateringLogs: {
+  }
+});
+
+const wateringSchema = new mongoose.Schema({
+  wateringLog: {
     type: [String],
     default: [],
-  },
-  fertilizingLogs: {
+  }
+});
+
+const fertilizingSchema = new mongoose.Schema({
+  fertilizingLog: {
     type: [String],
     default: [],
-  },
-  pruningLogs: {
+  }
+});
+
+const pruningSchema = new mongoose.Schema({
+  pruningLog: {
     type: [String],
     default: [],
-  },
+  }
 });
 
 const Plant = mongoose.model('Plant', plantSchema);
