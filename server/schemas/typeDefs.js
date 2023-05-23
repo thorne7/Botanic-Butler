@@ -13,10 +13,21 @@ const typeDefs = gql`
     user: User
   }
 
+  type Plant {
+    id: String!
+    common_name: String!
+    scientific_name: String!
+    genus: String
+    family: String
+
+
+  }
+
   type Query {
     users: [User]
     user(username: String!): User
     me: User
+    searchPlant(query: String!): [Plant]
   }
 
   type Mutation {

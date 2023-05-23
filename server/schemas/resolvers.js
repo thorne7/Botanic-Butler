@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
 const { signToken } = require('../utils/auth');
+const {searchPlants} = require('../utils/trefleApi')
 
 const resolvers = {
   Query: {
@@ -15,6 +16,11 @@ const resolvers = {
         return User.findOne({ _id: context.user._id });
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+    searchPlant: async (parent, { query }) => {
+      const data = await searchPlants(query)
+      console.log(data)
+      return data.data
     },
   },
 
