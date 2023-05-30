@@ -57,7 +57,7 @@ const typeDefs = gql`
     addWateringLog(plantId: String!, date: String, notes: String): WateringLog
     addFertilizingLog(plantId: String!, date: String, notes: String): FertilizingLog
     addPruningLog(plantId: String!, date: String, notes: String): PruningLog
-    addPlant(common_name: String, scientific_name: String): Plant 
+    addPlant(common_name: String!, scientific_name: String): Plant 
   }
 `;
 
