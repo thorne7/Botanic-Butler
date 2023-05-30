@@ -31,9 +31,12 @@ const pruningSchema = new mongoose.Schema({
 });
 
 const plantSchema = new mongoose.Schema({
-  name: {
+  commonName: {
     type: String,
     required: true,
+  },
+  scientificName: {
+    type: String,
   },
   wateringLogs: [wateringSchema],
   fertilizingLogs: [fertilizingSchema],
