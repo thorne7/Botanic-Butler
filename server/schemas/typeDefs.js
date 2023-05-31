@@ -22,6 +22,14 @@ const typeDefs = gql`
     pruningLogs: [PruningLog]
   }
 
+  type PlantSearch {
+    common_name: String
+    scientific_name: String
+    family: String
+    order: String
+    genus: String
+  }
+
   type WateringLog {
     _id: ID
     plant: Plant
@@ -47,7 +55,7 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     me: User
-    searchPlant(query: String!): [Plant]
+    searchPlant(query: String!): [PlantSearch]
     plants: [Plant]
   }
 

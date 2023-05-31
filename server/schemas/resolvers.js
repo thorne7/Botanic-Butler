@@ -3,7 +3,7 @@ const {
 } = require('apollo-server-express');
 
 const {
-  User
+  User, Plant
 } = require('../models');
 
 const {
@@ -104,63 +104,59 @@ const resolvers = {
     },
 
     addPlant: async (parent, { common_name, scientific_name }, context) => {
-      // Check if the user is authenticated
       if (!context.user) {
         throw new AuthenticationError('Authentication required');
       }
     
       try {
-        // Create a new plant
         const plant = await Plant.create({
-          common_name,
-          scientific_name,
-          ownerId: context.user._id, // Set the owner ID of the plant
+          common_name, scientific_name
         });
     
-        // Add the plant ID to the user's plants array
         await User.findByIdAndUpdate(context.user._id, {
           $push: { plants: plant._id },
         });
     
         return plant;
-      } catch (error) {
+      } catch (error) { 
+        console.log (error)
         throw new Error('Failed to add plant');
       }
     },
-    addWateringLog: async (parent, { plantId, date, notes }, context) => {
-      // Implement the logic for adding a watering log here
-      const newWateringLog = await WateringLog.create({ plantId, date, notes });
-      return newWateringLog;
-    },
-    addFertilizingLog: async (parent, { plantId, date, notes }, context) => {
-      // Implement the logic for adding a fertilizing log here
-      const newFertilizingLog = await FertilizingLog.create({ plantId, date, notes });
-      return newFertilizingLog;
-    },
-    addPruningLog: async (parent, { plantId, date, notes }, context) => {
-      // Implement the logic for adding a pruning log here
-      const newPruningLog = await PruningLog.create({ plantId, date, notes });
-      return newPruningLog;
-    },
+    // addWateringLog: async (parent, { plantId, date, notes }, context) => {
+    //   // Implement the logic for adding a watering log here
+    //   const newWateringLog = await WateringLog.create({ plantId, date, notes });
+    //   return newWateringLog;
+    // },
+    // addFertilizingLog: async (parent, { plantId, date, notes }, context) => {
+    //   // Implement the logic for adding a fertilizing log here
+    //   const newFertilizingLog = await FertilizingLog.create({ plantId, date, notes });
+    //   return newFertilizingLog;
+    // },
+    // addPruningLog: async (parent, { plantId, date, notes }, context) => {
+    //   // Implement the logic for adding a pruning log here
+    //   const newPruningLog = await PruningLog.create({ plantId, date, notes });
+    //   return newPruningLog;
+    // },
 
   },
 
   Plant: {
-    wateringLogs: async (parent) => {
-      return WateringLog.find({
-        plantId: parent._id
-      });
-    },
-    fertilizingLogs: async (parent) => {
-      return FertilizingLog.find({
-        plantId: parent._id
-      });
-    },
-    pruningLogs: async (parent) => {
-      return PruningLog.find({
-        plantId: parent._id
-      });
-    },
+    // wateringLogs: async (parent) => {
+    //   return WateringLog.find({
+    //     plantId: parent._id
+    //   });
+    // },
+    // fertilizingLogs: async (parent) => {
+    //   return FertilizingLog.find({
+    //     plantId: parent._id
+    //   });
+    // },
+    // pruningLogs: async (parent) => {
+    //   return PruningLog.find({
+    //     plantId: parent._id
+    //   });
+    // },
   },
 };
 
