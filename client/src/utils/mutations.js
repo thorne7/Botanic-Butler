@@ -26,11 +26,11 @@ export const ADD_USER = gql `
   }
 `;
 
-export const ADD_PLANT = gql `
-  mutation AddPlant($commonName: String!) {
-     addPlant(common_name: $commonName) {
-        _id
-        common_name
+export const ADD_PLANT = gql`
+  mutation AddPlant($common_name: String!, $scientific_name: String) {
+    addPlant(common_name: $common_name, scientific_name: $scientific_name) {
+      _id
+      common_name
+    }
   }
-}
 `;

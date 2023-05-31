@@ -19,3 +19,10 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const QUERY_SEARCH_PLANT = gql`
+  query SearchPlant($query: String!) {
+   searchPlant(query: $query) {
+    common_name
+  }
+}`
