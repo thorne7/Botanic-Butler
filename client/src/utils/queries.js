@@ -20,9 +20,20 @@ export const QUERY_ME = gql`
   }
 `;
 
+export const QUERY_SAVED_PLANTS = gql`
+  query GetSavedPlants {
+    savedPlants {
+      _id
+      common_name
+    }
+  }
+`;
+
 export const QUERY_SEARCH_PLANT = gql`
   query SearchPlant($query: String!) {
    searchPlant(query: $query) {
     common_name
-  }
-}`
+    scientific_name
+   }
+ }
+`;
