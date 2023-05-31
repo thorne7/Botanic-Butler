@@ -123,40 +123,40 @@ const resolvers = {
         throw new Error('Failed to add plant');
       }
     },
-    // addWateringLog: async (parent, { plantId, date, notes }, context) => {
-    //   // Implement the logic for adding a watering log here
-    //   const newWateringLog = await WateringLog.create({ plantId, date, notes });
-    //   return newWateringLog;
-    // },
-    // addFertilizingLog: async (parent, { plantId, date, notes }, context) => {
-    //   // Implement the logic for adding a fertilizing log here
-    //   const newFertilizingLog = await FertilizingLog.create({ plantId, date, notes });
-    //   return newFertilizingLog;
-    // },
-    // addPruningLog: async (parent, { plantId, date, notes }, context) => {
-    //   // Implement the logic for adding a pruning log here
-    //   const newPruningLog = await PruningLog.create({ plantId, date, notes });
-    //   return newPruningLog;
-    // },
+    addWateringLog: async (parent, { plantId, date, notes }, context) => {
+      // Implement the logic for adding a watering log here
+      const newWateringLog = await WateringLog.create({ plantId, date, notes });
+      return newWateringLog;
+    },
+    addFertilizingLog: async (parent, { plantId, date, notes }, context) => {
+      // Implement the logic for adding a fertilizing log here
+      const newFertilizingLog = await FertilizingLog.create({ plantId, date, notes });
+      return newFertilizingLog;
+    },
+    addPruningLog: async (parent, { plantId, date, notes }, context) => {
+      // Implement the logic for adding a pruning log here
+      const newPruningLog = await PruningLog.create({ plantId, date, notes });
+      return newPruningLog;
+    },
 
   },
 
   Plant: {
-    // wateringLogs: async (parent) => {
-    //   return WateringLog.find({
-    //     plantId: parent._id
-    //   });
-    // },
-    // fertilizingLogs: async (parent) => {
-    //   return FertilizingLog.find({
-    //     plantId: parent._id
-    //   });
-    // },
-    // pruningLogs: async (parent) => {
-    //   return PruningLog.find({
-    //     plantId: parent._id
-    //   });
-    // },
+    wateringLogs: async (parent) => {
+      return WateringLog.find({
+        plantId: parent._id
+      });
+    },
+    fertilizingLogs: async (parent) => {
+      return FertilizingLog.find({
+        plantId: parent._id
+      });
+    },
+    pruningLogs: async (parent) => {
+      return PruningLog.find({
+        plantId: parent._id
+      });
+    },
   },
 };
 

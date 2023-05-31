@@ -1,33 +1,64 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { ADD_PLANT } from '../utils/mutations';
+import { QUERY_SEARCH_PLANT } from '../utils/queries';
 
 const AddPlant = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [addPlant] = useMutation(ADD_PLANT);
 
-    const [commonName, setCommonName] =useState ('');
-    const [scientificName, setScientificName] = useState('');
+  const { loading, error, data } = useQuery(QUERY_SEARCH_PLANT, {
+    variables: { query: searchTerm },
+    skip: searchTerm === '',
+  });
 
-    const [addPlant, {loading }] = useMutation(ADD_PLANT);
+  const handleSearchPlant = () => {
+    setSearchTerm(searchTerm);
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        addPlant({
-            variables: { common_name: commonName, scientific_name: scientificName },
-        })
-        .then((response) => {
-            console.log('Plant added:', response.data.addPlant);
-            setCommonName('');
-            setScientificName('');
-        })
-        .catch((error) => {
-            console.error('Failed to add plant', error);
-        });
-    }
+  const handleSubmit = (plant) => {
+    addPlant({
+      variables: {
+        common_name: plant.common_name,
+        scientific_name: plant.scientific_name,
+      },
+    })
+      .then((response) => {
+        console.log('Plant added:', response.data.addPlant);
+      })
+      .catch((error) => {
+        console.error('Failed to add plant', error);
+      });
+  };
 
   return (
-    <main>
-      Add Plant Form
-    </main>
+    <div>
+      <h2>Add Plant</h2>
+
+      <div>
+        <h3>Plant Search</h3>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button onClick={handleSearchPlant}>Search</button>
+
+        {loading && <p>Loading search results...</p>}
+        {error && <p>Error: {error.message}</p>}
+
+        {data && data.searchPlant && (
+          <ul>
+            {data.searchPlant.map((plant) => (
+              <li key={plant._id}>
+                {plant.common_name}
+                <button onClick={() => handleSubmit(plant)}>Add Plant</button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
   );
 };
 
