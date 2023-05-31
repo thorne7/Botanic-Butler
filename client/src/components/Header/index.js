@@ -21,6 +21,9 @@ const Header = () => {
           <Button as={Link} variant="primary" className="m-2" to="/add-plant">
                 Add Plants
               </Button>
+          <Button as={Link} variant="primary" className="m-2" to="/my-plants">
+                My Plants
+              </Button>
         </Nav>
         <div>
           {Auth.loggedIn() ? (

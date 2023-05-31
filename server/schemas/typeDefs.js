@@ -57,6 +57,7 @@ const typeDefs = gql`
     me: User
     searchPlant(query: String!): [PlantSearch]
     plants: [Plant]
+    savedPlants: [Plant]
   }
 
   type Mutation {

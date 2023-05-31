@@ -140,7 +140,7 @@ const resolvers = {
     },
 
   },
-
+  
   Plant: {
     wateringLogs: async (parent) => {
       return WateringLog.find({
