@@ -49,7 +49,7 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError('Authentication required');
       }
-    
+
       try {
         const user = await Plant.findById(context.plant._id).populate('plants');
         return Plant.plants;

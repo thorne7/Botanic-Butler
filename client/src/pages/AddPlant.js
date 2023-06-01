@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Input } from '@chakra-ui/react'
 import { useQuery, useMutation } from '@apollo/client';
 import { ADD_PLANT } from '../utils/mutations';
 import { QUERY_SEARCH_PLANT } from '../utils/queries';
@@ -38,7 +37,7 @@ const AddPlant = () => {
 
       <div>
         <h3>Plant Search</h3>
-        <input variant='flushed' placeholder='Plant Names Go Here '
+        <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
