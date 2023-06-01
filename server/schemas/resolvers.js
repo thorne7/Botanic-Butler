@@ -44,24 +44,39 @@ const resolvers = {
       console.log(data);
       return data.data;
     },
-  },
-  Plant: {
-    wateringLogs: async (parent) => {
-      return WateringLog.find({
-        plantId: parent._id
-      });
-    },
-    fertilizingLogs: async (parent) => {
-      return FertilizingLog.find({
-        plantId: parent._id
-      });
-    },
-    pruningLogs: async (parent) => {
-      return PruningLog.find({
-        plantId: parent._id
-      });
+
+    savedPlants: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('Authentication required');
+      }
+    
+      try {
+        const user = await Plant.findById(context.plant._id).populate('plants');
+        return Plant.plants;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to retrieve saved plants');
+      }
     },
   },
+
+  // Plant: {
+  //   wateringLogs: async (parent) => {
+  //     return WateringLog.find({
+  //       plantId: parent._id
+  //     });
+  //   },
+  //   fertilizingLogs: async (parent) => {
+  //     return FertilizingLog.find({
+  //       plantId: parent._id
+  //     });
+  //   },
+  //   pruningLogs: async (parent) => {
+  //     return PruningLog.find({
+  //       plantId: parent._id
+  //     });
+  //   },
+  // },
 
 
   Mutation: {

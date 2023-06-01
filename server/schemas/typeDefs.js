@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
+    plants: [Plant]
   }
 
   type Auth {
@@ -56,7 +57,7 @@ const typeDefs = gql`
     user(username: String!): User
     me: User
     searchPlant(query: String!): [PlantSearch]
-    plants: [Plant]
+    getSavedPlants: [Plant]
     savedPlants: [Plant]
   }
 

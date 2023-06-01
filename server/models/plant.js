@@ -9,7 +9,7 @@ const wateringSchema = new mongoose.Schema({
     type: String,
   },
 });
-
+ 
 const fertilizingSchema = new mongoose.Schema({
   date: {
     type: Date,
@@ -30,6 +30,8 @@ const pruningSchema = new mongoose.Schema({
   },
 });
 
+
+
 const plantSchema = new mongoose.Schema({
   common_name: {
     type: String,
@@ -40,6 +42,7 @@ const plantSchema = new mongoose.Schema({
   wateringLogs: [wateringSchema],
   fertilizingLogs: [fertilizingSchema],
   pruningLogs: [pruningSchema],
+
 });
 
 const Plant = mongoose.model('Plant', plantSchema);

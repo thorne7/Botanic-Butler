@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, default: mongoose } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
@@ -19,6 +19,7 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+
 });
 
 userSchema.pre('save', async function (next) {
