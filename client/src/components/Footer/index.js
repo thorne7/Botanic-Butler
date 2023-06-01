@@ -6,15 +6,12 @@ import Container from 'react-bootstrap/Container';
 const Footer = () => {
   const location = useLocation();
   const navigate = useNavigate();
+
   return (
-    <footer className="w-100 mt-auto bg-light p-2 position-absolute bottom-0">
+    <footer className="w-100 mt-auto bg-light p-2 position-fixed bottom-0" style={{ paddingBottom: '20px' }}>
       <Container className="container text-center mb-2">
         {location.pathname !== '/' && (
-          <Button
-            variant='dark'
-            className="mb-3"
-            onClick={() => navigate(-1)}
-          >
+          <Button variant='dark' className="mb-3" onClick={() => navigate(-1)}>
             &larr; Go Back
           </Button>
         )}
@@ -23,10 +20,10 @@ const Footer = () => {
           <span
             className="emoji"
             role="img"
-            aria-label="heart"
+            aria-label="plant"
             aria-hidden="false"
           >
-            ❤️
+            🌱
           </span>
         </h4>
       </Container>

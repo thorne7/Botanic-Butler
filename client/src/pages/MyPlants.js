@@ -33,7 +33,8 @@ const MyPlants = () => {
 
   const handleLogSubmit = (logType) => {
     // Logic for creating a new log
-    const logMessage = logType === 'Watering' ? wateringLog : logType === 'Pruning' ? pruningLog : fertilizingLog;
+    const logMessage =
+      logType === 'Watering' ? wateringLog : logType === 'Pruning' ? pruningLog : fertilizingLog;
     console.log(`Create ${logType} log with message: ${logMessage}`);
     // Reset the log input fields
     setWateringLog('');
@@ -48,53 +49,78 @@ const MyPlants = () => {
   };
 
   return (
-    <div>
-      <h2>My Plants</h2>
-      {plants.length ? (
-        <ul>
-          {plants.map((plant) => (
-            <li key={plant.id}>
-              {plant.common_name} - {plant.scientific_name}
-              <button onClick={() => handleDeletePlant(plant.id)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No plants added yet.</p>
-      )}
+    <div className="container mt-5 pb-4" style={{ backgroundColor: '#4E7130', color: '#C9B590' }}>
+      <h2 className="mb-4">My Plants</h2>
+      <div className="overflow-auto" style={{ maxHeight: '300px' }}>
+        {plants.length ? (
+          <ul className="list-group">
+            {plants.map((plant) => (
+              <li
+                key={plant.id}
+                className="list-group-item d-flex justify-content-between align-items-center"
+              >
+                {plant.common_name} - {plant.scientific_name}
+                <button
+                  className="btn btn-outline-danger btn-sm"
+                  onClick={() => handleDeletePlant(plant.id)}
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No plants added yet.</p>
+        )}
+      </div>
 
       <h2>Add Plant</h2>
       <form onSubmit={handlePlantSubmit}>
-        <label>
-          Common Name:
-          <input type="text" name="common_name" required />
-        </label>
-        <label>
-          Scientific Name:
-          <input type="text" name="scientific_name" required />
-        </label>
-        <button type="submit">Add Plant</button>
+        <div className="mb-3">
+          <label className="form-label">Common Name:</label>
+          <input type="text" className="form-control" name="common_name" required />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Scientific Name:</label>
+          <input type="text" className="form-control" name="scientific_name" required />
+        </div>
+        <button type="submit" className="btn btn-primary">Add Plant</button>
       </form>
 
       <h2>Create Log</h2>
       <form onSubmit={(e) => e.preventDefault()}>
-        <label>
-          Watering Log:
-          <input type="text" value={wateringLog} onChange={(e) => setWateringLog(e.target.value)} />
-        </label>
-        <button onClick={() => handleLogSubmit('Watering')}>Submit Watering Log</button>
+        <div className="mb-3">
+          <label className="form-label">Watering Log:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={wateringLog}
+            onChange={(e) => setWateringLog(e.target.value)}
+          />
+        </div>
+        <button className="btn btn-primary" onClick={() => handleLogSubmit('Watering')}>Submit Watering Log</button>
 
-        <label>
-          Pruning Log:
-          <input type="text" value={pruningLog} onChange={(e) => setPruningLog(e.target.value)} />
-        </label>
-        <button onClick={() => handleLogSubmit('Pruning')}>Submit Pruning Log</button>
+        <div className="mb-3">
+          <label className="form-label">Pruning Log:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={pruningLog}
+            onChange={(e) => setPruningLog(e.target.value)}
+          />
+        </div>
+        <button className="btn btn-primary" onClick={() => handleLogSubmit('Pruning')}>Submit Pruning Log</button>
 
-        <label>
-          Fertilizing Log:
-          <input type="text" value={fertilizingLog} onChange={(e) => setFertilizingLog(e.target.value)} />
-        </label>
-        <button onClick={() => handleLogSubmit('Fertilizing')}>Submit Fertilizing Log</button>
+        <div className="mb-3">
+          <label className="form-label">Fertilizing Log:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={fertilizingLog}
+            onChange={(e) => setFertilizingLog(e.target.value)}
+          />
+        </div>
+        <button className="btn btn-primary" onClick={() => handleLogSubmit('Fertilizing')}>Submit Fertilizing Log</button>
       </form>
     </div>
   );
